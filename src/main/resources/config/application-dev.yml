@@ -1,0 +1,57 @@
+spring:
+  jackson:
+    serialization: {indent-output: true}
+  sleuth:
+    sampler: {probability: 1}
+  mail: {port: 25, host: localhost}
+  zipkin:
+    base-url: http://localhost:9411
+    locator:
+      discovery: {enabled: true}
+    enabled: false
+  datasource:
+    password: dbpwd
+    type: com.zaxxer.hikari.HikariDataSource
+    url: jdbc:postgresql://postgresql-database.samplemeter:5432/sampledb
+    username: dbuser
+    hikari: {auto-commit: false, poolName: Hikari}
+  profiles:
+    include: [swagger]
+    active: dev
+  messages: {cache-duration: PT1S}
+  jpa:
+    database: POSTGRESQL
+    show-sql: true
+    database-platform: io.github.jhipster.domain.util.FixedPostgreSQL82Dialect
+    properties: {hibernate.cache.use_second_level_cache: true, hibernate.cache.use_minimal_puts: true,
+      hibernate.id.new_generator_mappings: true, hibernate.cache.hazelcast.use_lite_member: true,
+      hibernate.connection.provider_disables_autocommit: true, hibernate.cache.use_query_cache: false,
+      hibernate.cache.region.factory_class: com.hazelcast.hibernate.HazelcastCacheRegionFactory,
+      hibernate.generate_statistics: true, hibernate.cache.hazelcast.instance_name: postgressvc}
+  devtools:
+    livereload: {enabled: false}
+    restart: {enabled: true}
+  thymeleaf: {cache: false}
+  liquibase: {contexts: dev}
+server: {port: 8080}
+jhipster:
+  cache:
+    hazelcast:
+      management-center: {update-interval: 3, enabled: false, url: 'http://localhost:8180/mancenter'}
+      time-to-live-seconds: 3600
+      backup-count: 1
+  security:
+    authentication:
+      jwt: {base64-secret: MDM4ODgyMTYzYjE3MjJiNzRmNTMzZTA5ODg3NjIyOWJmMWFkZDQzZjE1YWQ3NTcyYjJiN2I2MTE1NGQ1YzY3MzFjMGU4NzE4M2JjODRmMDY4MGFiZDA5ZmY3N2U2MGYxZGZmNWU2ZGYyNmFiMmMyMzcxYzUzNzc4ZWVmZWQyYjI=,
+        token-validity-in-seconds: 86400, token-validity-in-seconds-for-remember-me: 2592000}
+  mail: {base-url: 'http://127.0.0.1:8080', from: postgressvc@localhost}
+  http: {version: V_1_1}
+  logging:
+    logstash: {port: 5000, queue-size: 512, host: localhost, enabled: false}
+  metrics:
+    logs: {report-frequency: 60, enabled: false}
+management:
+  endpoint:
+    prometheus: {enabled: 'true'}
+logging:
+  level: {ROOT: DEBUG, com.infy.postgressvc: DEBUG, io.github.jhipster: DEBUG}

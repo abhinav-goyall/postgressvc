@@ -1,0 +1,23 @@
+apiVersion: monitoring.coreos.com/v1
+kind: ServiceMonitor
+metadata:
+  labels:
+    k8s-app: postgressvc
+  name: postgressvc
+  namespace: openshift-monitoring
+spec:
+  endpoints:
+    - interval: 2m
+      port: prom
+      scrapeTimeout: 2m
+    - interval1: 30s
+      port: http1
+  namespaceSelector:
+    matchNames:
+    - samplemeter-dev-app
+    - samplemeter-test-app
+    - samplemeter-devops-app
+    
+  selector:
+    matchLabels:
+      app: postgressvc
