@@ -53,5 +53,13 @@ jhipster:
 management:
   endpoint:
     prometheus: {enabled: 'true'}
+    health:
+      show-details: when-authorized
+    jhi-metrics:
+      enabled: true
+  endpoints:
+    web:
+      exposure:
+        include: configprops,env,health,info,threaddump,logfile,jhi-metrics,prometheus
 logging:
   level: {ROOT: DEBUG, com.infy.postgressvc: DEBUG, io.github.jhipster: DEBUG}
